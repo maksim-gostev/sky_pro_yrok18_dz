@@ -1,5 +1,7 @@
 from marshmallow import Schema, fields
 
+from setup_db import db
+
 
 class Movie(db.Model):
     __tablename__ = 'movie'
@@ -15,6 +17,9 @@ class Movie(db.Model):
     director = db.relationship("Director")
 
 
+
+
+
 class MovieSchema(Schema):
     id = fields.Int(dump_only=True)
     title = fields.Str()
@@ -27,7 +32,8 @@ class MovieSchema(Schema):
     director_id = fields.Int()
     director = fields.Method('get_director_name')
 
-    def get_director_name(self, movies):
+    def get_director_name(movies):
         return movies.director.name
-    def get_genre_name(self, movies):
+
+    def get_genre_name(movies):
         return movies.genre.name
