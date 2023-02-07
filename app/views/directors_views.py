@@ -9,7 +9,7 @@ directors_ns = Namespace('director')
 directors_schema = DirectorSchema(many=True)
 director_schema = DirectorSchema()
 
-@directors_ns.route('/')
+@directors_ns.route('')
 class DirectorsView(Resource):
     def get(swlf):
         all_derector = directors_service.get_all()
@@ -24,8 +24,8 @@ class DirectorsView(Resource):
 
 @directors_ns.route('/<int:did>')
 class DirectorView(Resource):
-    def get(self, gid):
-        director = directors_service.get_one(gid)
+    def get(self, did):
+        director = directors_service.get_one(did)
         return director_schema.dump(director), 201
 
 
@@ -37,6 +37,7 @@ class DirectorView(Resource):
     def put(self, did):
         req_json = request.json
         req_json['id'] = did
+
         director = directors_service.update(req_json)
         return director_schema.dump(director), 204
 

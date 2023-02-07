@@ -21,7 +21,7 @@ class GenresService:
 
         genre.name = data.get('name')
 
-        return self.dao.update(gid)
+        return self.dao.update(genre)
 
     def update_patch(self, data):
         gid = data.get("id")

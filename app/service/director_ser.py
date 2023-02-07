@@ -16,8 +16,11 @@ class DirectorsService:
 
     def update(self, data):
         did = data.get("id")
+
         director = self.get_one(did)
+
         director.name = data.get('name')
+
         return self.dao.update(director)
 
 

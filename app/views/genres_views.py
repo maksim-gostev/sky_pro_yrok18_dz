@@ -38,13 +38,6 @@ class GenreView(Resource):
         genre = genres_service.update(req_json)
         return genre_schema.dump(genre), 204
 
-    def patch(self, gid):
-        req_json = request.json
-        req_json['id'] = gid
-
-        genre = genres_service.update_patch(req_json)
-
-        return genre_schema.dump(genre), 204
 
     def delete(self, gid):
         genres_service.delete(gid)
