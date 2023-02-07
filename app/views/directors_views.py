@@ -24,6 +24,11 @@ class DirectorsView(Resource):
 
 @directors_ns.route('/<int:did>')
 class DirectorView(Resource):
+    def get(self, gid):
+        director = directors_service.get_one(gid)
+        return director_schema.dump(director), 201
+
+
     def delete(self, did):
         directors_service.delete(did)
         return "", 204
@@ -36,9 +41,6 @@ class DirectorView(Resource):
         return director_schema.dump(director), 204
 
 
-    def get(self, gid):
-        director = directors_service.get_one(gid)
-        return director_schema.dump(director), 201
 
 
 

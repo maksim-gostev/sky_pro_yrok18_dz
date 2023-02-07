@@ -12,7 +12,7 @@ movies_schema = MovieSchema(many=True)
 movie_schema = MovieSchema()
 
 
-@movies_ns.route('/')
+@movies_ns.route('')
 class MoviesView(Resource):
     def get(self):
         # director_id = request.values.get("director_id")

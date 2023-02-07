@@ -16,8 +16,11 @@ class GenresService:
 
     def update(self, data):
         gid = data.get("id")
+
         genre = self.get_one(gid)
+
         genre.name = data.get('name')
+
         return self.dao.update(gid)
 
     def update_patch(self, data):

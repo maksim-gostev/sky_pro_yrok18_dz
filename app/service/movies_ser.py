@@ -30,7 +30,6 @@ class MoviesService:
         movie.genre_id = data.get('genre_id')
         movie.director_id = data.get('director_id')
 
-
         return self.dao.update(movie)
 
 
