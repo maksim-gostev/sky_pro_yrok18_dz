@@ -17,9 +17,6 @@ class Movie(db.Model):
     director = db.relationship("Director")
 
 
-
-
-
 class MovieSchema(Schema):
     id = fields.Int(dump_only=True)
     title = fields.Str()
@@ -32,8 +29,7 @@ class MovieSchema(Schema):
     director_id = fields.Int()
     director = fields.Method('get_director_name')
 
-    def get_director_name(movies):
+    def get_director_name(self, movies):
         return movies.director.name
-
-    def get_genre_name(movies):
+    def get_genre_name(self, movies):
         return movies.genre.name

@@ -6,13 +6,13 @@ class GenresDAO:
         self.session = session
 
     def get_one(self, did):
-        return self.session.get(did)
+        return self.session.query(Genre).get(did)
 
     def get_all(self):
         return self.session.query(Genre).all()
 
     def create(self, data):
-        genre = Genre(**data)
+        genre = Genre(name = data.get('name'))
         self.session.add(genre)
         self.session.commit()
         return genre
