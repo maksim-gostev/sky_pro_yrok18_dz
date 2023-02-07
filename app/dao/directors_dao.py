@@ -12,9 +12,7 @@ class DirectorsDAO:
         return self.session.query(Director).all()
 
     def create(self, data):
-        director = Director(
-        name = data.get('name')
-        )
+        director = Director(**data)
         self.session.add(director)
         self.session.commit()
         return director

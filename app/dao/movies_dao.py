@@ -12,17 +12,7 @@ class MoviesDAO:
         return self.session.query(Movie).all()
 
     def create(self, data):
-        movie = Movie(
-            title=data.get('title'),
-            description=data.get('description'),
-            trailer=data.get('trailer'),
-            year=data.get('year'),
-            rating=data.get('rating'),
-            genre_id=data.get('genre_id'),
-            director_id=data.get('director_id'),
-            genre=data.get('genre'),
-            director=data.get('director')
-        )
+        movie = Movie(**data)
         self.session.add(movie)
         self.session.commit()
         return movie
