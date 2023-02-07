@@ -56,14 +56,6 @@ class MovieView(Resource):
         return movie_schema.dump(movie), 204
 
 
-    def patch(self, mid):
-        req_json = request.json
-        req_json['id'] = mid
-
-        movies_service.update_patch(req_json)
-
-        return "", 204
-
     def delete(self, mid):
         movies_service.delete(mid)
 

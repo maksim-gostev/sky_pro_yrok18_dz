@@ -21,18 +21,5 @@ class DirectorsService:
         return self.dao.update(director)
 
 
-
-
-    def update_patch(self, data):
-        did = data.get("id")
-
-        director = self.get_one(did)
-
-        if 'name' in director:
-            director.name = data.get('name')
-
-        return self.dao.update(director)
-
-
     def delete(self, did):
         self.dao.delete(did)
