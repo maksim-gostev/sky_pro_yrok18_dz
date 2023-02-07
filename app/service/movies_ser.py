@@ -9,7 +9,14 @@ class MoviesService:
     def get_one(self, mid):
         return self.dao.get_one(mid)
 
-    def get_all(self):
+    def get_all(self, director_id=None, genre_id=None, year=None):
+        if director_id:
+            return self.dao.get_by_director_id(director_id)
+        elif genre_id:
+            return self.dao.get_by_genre_id(genre_id)
+        elif year:
+            return self.dao.get_by_year(year)
+
         return self.dao.get_all()
 
 
