@@ -20,6 +20,8 @@ class  GenresView(Resource):
 
     def post(self):
         req_json = request.json
+        if not req_json:
+            return "вы не ввели данные", 404
         genre = genres_service.create(req_json)
         return genre_schema.dump(genre), 201
 
@@ -28,11 +30,16 @@ class  GenresView(Resource):
 class GenreView(Resource):
     def get(self, gid):
         genre = genres_service.get_one(gid)
+        if not genre:
+            return "такого жанра нет", 404
         return genre_schema.dump(genre), 201
 
 
     def put(self, gid):
         req_json = request.json
+        if not req_json:
+            return "вы не ввели данные", 404
+
         req_json['id'] = gid
 
         genre = genres_service.update(req_json)
@@ -42,3 +49,14 @@ class GenreView(Resource):
     def delete(self, gid):
         genres_service.delete(gid)
         return "", 204
+
+
+    def patch(self, gid):
+        req_json = request.json
+        if not req_json:
+            return "вы не ввели данные", 404
+
+        req_json['id'] = gid
+
+        genre = genres_service.patch(req_json)
+        return genre_schema.dump(genre), 204

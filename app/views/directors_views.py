@@ -18,15 +18,31 @@ class DirectorsView(Resource):
 
     def post(self):
         req_json = request.json
+        if not req_json:
+            return "вы не ввели данные", 404
         director = directors_service.create(req_json)
         return director_schema.dump(director), 201
+
 
 
 @directors_ns.route('/<int:did>')
 class DirectorView(Resource):
     def get(self, did):
         director = directors_service.get_one(did)
+        if not director:
+            return "такого режисёра нет", 404
         return director_schema.dump(director), 201
+
+
+    def put(self, did):
+        req_json = request.json
+        if not req_json:
+            return "вы не ввели данные", 404
+
+        req_json['id'] = did
+
+        director = directors_service.update(req_json)
+        return director_schema.dump(director), 204
 
 
     def delete(self, did):
@@ -34,11 +50,16 @@ class DirectorView(Resource):
         return "", 204
 
 
-    def put(self, did):
+
+
+    def patch(self, did):
         req_json = request.json
+        if not req_json:
+            return "вы не ввели данные", 404
+
         req_json['id'] = did
 
-        director = directors_service.update(req_json)
+        director = directors_service.patch(req_json)
         return director_schema.dump(director), 204
 
 

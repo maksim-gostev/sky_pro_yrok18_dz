@@ -23,12 +23,12 @@ class GenresService:
 
         return self.dao.update(genre)
 
-    def update_patch(self, data):
+    def patch(self, data):
         gid = data.get("id")
 
         genre = self.get_one(gid)
 
-        if 'name' in genre:
+        if 'name' in data:
             genre.name = data.get('name')
 
         return self.dao.update(genre)
